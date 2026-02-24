@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Enter the Hollowed Realm • Kindle the Flame</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0c0a14 url('https://images.unsplash.com/photo-1551029506-0807df4cb8ed?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=90') center/cover fixed no-repeat;
+      --card: rgba(20, 12, 28, 0.90);
+      --accent: #d32f2f;
+      --accent-dark: #b71c1c;
+      --text: #f0e6d2;
+      --text-muted: #a89a7c;
+      --border: #3f1e38;
+      --glow: rgba(211, 47, 47, 0.45);
+      --error: #f44336;
+      --success: #66bb6a;
+      --overlay: radial-gradient(circle at center, #7f0000 10%, #000 70%);
+      --soul-particle: rgba(240, 240, 255, 0.35);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family: 'Cinzel', serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      background-attachment: fixed;
+      overflow: hidden;
+      position: relative;
+      animation: hollow-drain 60s infinite alternate ease-in-out;
+    }
+
+    @keyframes hollow-drain {
+      0%   { filter: grayscale(0%) brightness(1) contrast(1.05); }
+      100% { filter: grayscale(35%) brightness(0.85) contrast(0.92); }
+    }
+
+    body::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.75) 100%);
+      pointer-events: none;
+      z-index: -2;
+      animation: soul-flicker 25s infinite alternate ease-in-out;
+    }
+
+    @keyframes soul-flicker {
+      0%, 100% { opacity: 0.6; }
+      50%      { opacity: 0.85; }
+    }
+
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      background: var(--soul-particle);
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(240,240,255,0.6);
+      animation: drift linear infinite;
+      will-change: transform, opacity;
+    }
+
+    @keyframes drift {
+      0%   { transform: translateY(100vh) scale(0.2); opacity: 0; }
+      10%  { opacity: 0.7; }
+      90%  { opacity: 0.7; }
+      100% { transform: translateY(-20vh) scale(0.8); opacity: 0; }
+    }
+
+    .container { width: 100%; max-width: 480px; z-index: 2; position: relative; }
+
+    .card {
+      background: var(--card);
+      backdrop-filter: blur(18px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3.2rem 2.6rem;
+      box-shadow: 
+        0 30px 80px rgba(0,0,0,0.95),
+        inset 0 0 60px rgba(0,0,0,0.65),
+        0 0 90px var(--glow);
+      transition: transform 0.4s ease, box-shadow 0.6s ease;
+      animation: faint-pulse 18s infinite alternate ease-in-out;
+    }
+
+    .card:hover { transform: translateY(-6px); }
+
+    @keyframes faint-pulse {
+      0%   { border-color: var(--border); box-shadow: 0 30px 90px rgba(0,0,0,0.95), inset 0 0 70px rgba(0,0,0,0.7), 0 0 30px var(--glow); }
+      100% { border-color: #522f3f; box-shadow: 0 30px 90px rgba(0,0,0,0.95), inset 0 0 70px rgba(0,0,0,0.7), 0 0 60px rgba(211,47,47,0.55); }
+    }
+
+    h1 {
+      font-family: 'Cinzel Decorative', cursive;
+      text-align: center;
+      color: var(--accent);
+      font-size: 3.5rem;
+      letter-spacing: 4px;
+      text-shadow: 0 0 35px var(--accent), 4px 4px 0 #000;
+      margin-bottom: 0.6rem;
+      animation: title-glow 12s infinite alternate ease-in-out;
+    }
+
+    @keyframes title-glow {
+      0%   { text-shadow: 0 0 35px var(--accent), 4px 4px 0 #000; }
+      100% { text-shadow: 0 0 55px var(--accent), 4px 4px 0 #000; }
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 1.28rem;
+      margin-bottom: 2.8rem;
+      text-shadow: 1px 1px 6px #000;
+    }
+
+    .form-group { margin-bottom: 2rem; }
+
+    label {
+      display: block;
+      margin-bottom: 0.6rem;
+      color: var(--text-muted);
+      font-size: 1.08rem;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 1.2rem 1.4rem;
+      background: rgba(12, 8, 22, 0.78);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 1.08rem;
+      transition: all 0.25s ease;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(211,47,47,0.28), inset 0 0 14px rgba(211,47,47,0.18);
+    }
+
+    .password-wrapper { position: relative; }
+
+    .toggle-password {
+      position: absolute;
+      right: 1.3rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.65rem;
+      cursor: pointer;
+      transition: color 0.25s, transform 0.2s;
+    }
+
+    .toggle-password:hover, .toggle-password:focus {
+      color: var(--accent);
+      transform: translateY(-50%) scale(1.18);
+    }
+
+    .error-message {
+      color: var(--error);
+      font-size: 0.96rem;
+      margin-top: 0.5rem;
+      min-height: 1.3em;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 1.4rem;
+      background: linear-gradient(145deg, var(--accent), var(--accent-dark));
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+      transition: all 0.35s ease;
+      box-shadow: 0 9px 0 #000, inset 0 -4px rgba(0,0,0,0.55);
+      margin-top: 2rem;
+    }
+
+    .btn:hover:not(:disabled) {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 0 #000;
+    }
+
+    .btn:disabled {
+      background: #3a2525;
+      color: #887;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: 0 5px 0 #000;
+    }
+
+    .link-text {
+      text-align: center;
+      margin-top: 2.5rem;
+      color: var(--text-muted);
+      font-size: 1.08rem;
+    }
+
+    .link-text a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .link-text a:hover {
+      text-decoration: underline;
+      color: #ef5350;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.7s ease;
+    }
+
+    .overlay.active { opacity: 1; pointer-events: all; }
+
+    #portalOverlay {
+      background: var(--overlay);
+      transform: scale(0.1);
+      border-radius: 50%;
+      transition: all 1.6s cubic-bezier(0.19,1,0.22,1);
+    }
+
+    #portalOverlay.active {
+      transform: scale(3.5);
+      border-radius: 0;
+    }
+
+    #loadingOverlay {
+      background: rgba(0,0,0,0.96);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .loading-text {
+      color: var(--accent);
+      font-family: 'Cinzel Decorative', cursive;
+      font-size: 3.4rem;
+      text-shadow: 0 0 40px var(--accent);
+      animation: abyss-pulse 2.2s infinite;
+    }
+
+    @keyframes abyss-pulse {
+      0%,100% { opacity: 0.65; transform: scale(0.94); }
+      50%     { opacity: 1;   transform: scale(1.06); }
+    }
+
+    @media (max-width: 500px) {
+      .card { padding: 2.6rem 2rem; }
+      h1 { font-size: 2.9rem; }
+      .loading-text { font-size: 2.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating hollow soul particles -->
+  <div class="particles" id="particles"></div>
+
+<div class="container">
+  <div class="card">
+    <h1>ENTER</h1>
+    <p class="subtitle">Do not go hollow...</p>
+
+    <form id="signinForm" novalidate>
+
+      <div class="form-group">
+        <label for="email">Soul Identifier (Gmail only)</label>
+        <input type="email" id="email" required autocomplete="email" placeholder="yourname@gmail.com">
+        <div class="error-message" id="emailError"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Cursed Word</label>
+        <div class="password-wrapper">
+          <input type="password" id="password" required autocomplete="current-password" placeholder="••••••••">
+          <button type="button" class="toggle-password" id="toggleBtn">👁</button>
+        </div>
+        <div class="error-message" id="passwordError"></div>
+      </div>
+
+      <button type="submit" class="btn" id="submitBtn" disabled>ENTER THE ABYSS</button>
+    </form>
+
+    <div class="link-text">
+      Still unlinked? <a href="signup.html">kindle humanity → Sign up</a>
+    </div>
+  </div>
+</div>
+
+<div id="portalOverlay" class="overlay"></div>
+<div id="loadingOverlay" class="overlay">
+  <div class="loading-text">Traversing the Abyss...</div>
+</div>
+
+<script>
+  const form = document.getElementById('signinForm');
+  const emailInput = document.getElementById('email');
+  const pwInput = document.getElementById('password');
+  const submitBtn = document.getElementById('submitBtn');
+  const emailError = document.getElementById('emailError');
+  const pwError = document.getElementById('passwordError');
+  const toggleBtn = document.getElementById('toggleBtn');
+
+  // Password visibility toggle
+  toggleBtn.addEventListener('click', () => {
+    const hidden = pwInput.type === 'password';
+    pwInput.type = hidden ? 'text' : 'password';
+    toggleBtn.textContent = hidden ? '🙈' : '👁';
+  });
+
+  // Hollow soul particles
+  function createParticle() {
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+
+    const size     = Math.random() * 4 + 2;
+    const left     = Math.random() * 100;
+    const duration = Math.random() * 25 + 20;
+    const delay    = Math.random() * 10;
+
+    particle.style.width           = `${size}px`;
+    particle.style.height          = `${size}px`;
+    particle.style.left            = `${left}vw`;
+    particle.style.animationDuration = `${duration}s`;
+    particle.style.animationDelay  = `${delay}s`;
+
+    document.getElementById('particles').appendChild(particle);
+
+    setTimeout(() => particle.remove(), (duration + 1) * 1000);
+  }
+
+  setInterval(createParticle, 800);
+
+  // Form validation
+  function validate() {
+    const email = emailInput.value.trim().toLowerCase();
+    let valid = true;
+
+    if (!email) {
+      emailError.textContent = "The soul identifier is required";
+      valid = false;
+    } else if (!email.endsWith('@gmail.com')) {
+      emailError.textContent = "Only Gmail addresses are bound to this realm";
+      valid = false;
+    } else {
+      emailError.textContent = "";
+    }
+
+    if (!pwInput.value) {
+      pwError.textContent = "Speak the cursed word";
+      valid = false;
+    } else {
+      pwError.textContent = "";
+    }
+
+    submitBtn.disabled = !valid;
+  }
+
+  [emailInput, pwInput].forEach(el => {
+    el.addEventListener('input', validate);
+  });
+
+  // ────────────────────────────────────────────────
+  // Sign-in logic with heavy debugging
+  // ────────────────────────────────────────────────
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (submitBtn.disabled) return;
+
+    const email = emailInput.value.trim().toLowerCase();
+    const password = pwInput.value;
+
+    console.log("[SIGNIN] Attempt with:", email);
+
+    const stored = localStorage.getItem(`flame_${email}`);
+    console.log("[SIGNIN] Stored data exists?", !!stored);
+
+    if (!stored) {
+      emailError.textContent = "No soul bears this mark in the registry";
+      pwError.textContent = "";
+      console.warn("[SIGNIN] No account found for this email");
+      return;
+    }
+
+    let user;
+    try {
+      user = JSON.parse(stored);
+      console.log("[SIGNIN] Parsed user:", user);
+    } catch (err) {
+      console.error("[SIGNIN] Failed to parse stored user data", err);
+      emailError.textContent = "Account data corrupted – please sign up again";
+      return;
+    }
+
+    if (user.password !== password) {
+      pwError.textContent = "The cursed word is incorrect... try again";
+      emailError.textContent = "";
+      console.warn("[SIGNIN] Password mismatch");
+      return;
+    }
+
+    console.log("[SIGNIN] Password correct – saving currentUser");
+
+    // Store current user
+    localStorage.setItem("currentUser", JSON.stringify({
+      username: user.username || email.split('@')[0],
+      email: email,
+      role: user.role || "user"
+    }));
+
+    console.log("[SIGNIN] currentUser saved:", localStorage.getItem("currentUser"));
+
+    // Portal animation + redirect with debug
+    const portal = document.getElementById('portalOverlay');
+    const loading = document.getElementById('loadingOverlay');
+
+    console.log("[SIGNIN] Starting portal animation");
+
+    portal.classList.add('active');
+
+    setTimeout(() => {
+      console.log("[SIGNIN] Showing loading screen");
+      loading.classList.add('active');
+
+      setTimeout(() => {
+        console.log("[SIGNIN] Executing redirect to feed.html");
+        alert("Login successful – redirecting to feed.html now\n\nIf page doesn't change:\n1. Check console (F12)\n2. Make sure file is named exactly feed.html\n3. Try opening in new tab manually");
+
+        try {
+          window.location.href = "feed.html";
+          // Fallback after 800ms if still here
+          setTimeout(() => {
+            if (document.hasFocus()) {
+              console.error("[SIGNIN] Redirect failed – trying replace");
+              window.location.replace("feed.html");
+            }
+          }, 800);
+        } catch (err) {
+          console.error("[SIGNIN] Redirect threw error:", err);
+          alert("Redirect failed: " + err.message + "\n\nCheck if feed.html exists in same folder");
+        }
+      }, 2800); // ← increased a bit
+    }, 1600);   // ← increased a bit
+  });
+
+  // Auto-redirect if already signed in
+  if (localStorage.getItem("currentUser")) {
+    console.log("[SIGNIN] Already logged in – auto-redirect");
+    window.location.href = "feed.html";
+  }
+
+  validate();
+</script>   
+</body>
+</html>

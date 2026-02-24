@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QUIZ APP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .question h3 {
+            margin-top: 0;
+            color: #444;
+        }
+        label {
+            cursor: pointer;
+            margin-left: 5px;
+        }
+        button {
+            display: block;
+            margin: 30px auto;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .result-container {
+            margin-top: 40px;
+            padding: 25px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .score-summary {
+            font-size: 1.6em;
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #e9f7ff;
+            border-radius: 8px;
+        }
+        .question-result {
+            margin-bottom: 15px;
+            padding: 12px 15px;
+            border-left: 6px solid #ccc;
+            background: #f9f9f9;
+            border-radius: 4px;
+        }
+        .correct {
+            background-color: #e6ffed;
+            border-left-color: #28a745;
+        }
+        .incorrect {
+            background-color: #ffebee;
+            border-left-color: #dc3545;
+        }
+        .not-answered {
+            background-color: #f0f0f0;
+            border-left-color: #6c757d;
+        }
+        img {
+            max-width: 220px;
+            height: auto;
+            border-radius: 6px;
+            margin: 10px 0;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Quiz</h1>
+
+<div class="question">
+    1. What is the most common color of an apple?<br>
+    <input type="radio" id="q1a" name="q1"><label for="q1a">Blue</label><br>
+    <input type="radio" id="q1b" name="q1"><label for="q1b">Orange</label><br>
+    <input type="radio" id="q1c" name="q1"><label for="q1c">Red</label><br>
+    <input type="radio" id="q1d" name="q1"><label for="q1d">Yellow</label>
+</div>
+
+<div class="question">
+    2. What is 1 + 1?<br>
+    <input type="radio" id="q2a" name="q2"><label for="q2a">2</label><br>
+    <input type="radio" id="q2b" name="q2"><label for="q2b">3</label><br>
+    <input type="radio" id="q2c" name="q2"><label for="q2c">4</label><br>
+    <input type="radio" id="q2d" name="q2"><label for="q2d">5</label>
+</div>
+
+<div class="question">
+    3. What is the capital of France?<br>
+    <input type="radio" id="q3a" name="q3"><label for="q3a">Berlin</label><br>
+    <input type="radio" id="q3b" name="q3"><label for="q3b">Madrid</label><br>
+    <input type="radio" id="q3c" name="q3"><label for="q3c">Paris</label><br>
+    <input type="radio" id="q3d" name="q3"><label for="q3d">Rome</label>
+</div>
+
+<div class="question">
+    4. How many legs does a spider have?<br>
+    <input type="radio" id="q4a" name="q4"><label for="q4a">6</label><br>
+    <input type="radio" id="q4b" name="q4"><label for="q4b">8</label><br>
+    <input type="radio" id="q4c" name="q4"><label for="q4c">10</label><br>
+    <input type="radio" id="q4d" name="q4"><label for="q4d">4</label>
+</div>
+
+<div class="question">
+    5. What color is the sky on a clear day?<br>
+    <input type="radio" id="q5a" name="q5"><label for="q5a">Green</label><br>
+    <input type="radio" id="q5b" name="q5"><label for="q5b">Blue</label><br>
+    <input type="radio" id="q5c" name="q5"><label for="q5c">Red</label><br>
+    <input type="radio" id="q5d" name="q5"><label for="q5d">Yellow</label>
+</div>
+
+<div class="question">
+    6. How many days are in a week?<br>
+    <input type="radio" id="q6a" name="q6"><label for="q6a">5</label><br>
+    <input type="radio" id="q6b" name="q6"><label for="q6b">6</label><br>
+    <input type="radio" id="q6c" name="q6"><label for="q6c">7</label><br>
+    <input type="radio" id="q6d" name="q6"><label for="q6d">8</label>
+</div>
+
+<div class="question">
+    7. What is the largest ocean on Earth?<br>
+    <input type="radio" id="q7a" name="q7"><label for="q7a">Atlantic</label><br>
+    <input type="radio" id="q7b" name="q7"><label for="q7b">Indian</label><br>
+    <input type="radio" id="q7c" name="q7"><label for="q7c">Pacific</label><br>
+    <input type="radio" id="q7d" name="q7"><label for="q7d">Arctic</label>
+</div>
+
+<div class="question">
+    8. What animal is known as man's best friend?<br>
+    <input type="radio" id="q8a" name="q8"><label for="q8a">Cat</label><br>
+    <input type="radio" id="q8b" name="q8"><label for="q8b">Dog</label><br>
+    <input type="radio" id="q8c" name="q8"><label for="q8c">Bird</label><br>
+    <input type="radio" id="q8d" name="q8"><label for="q8d">Fish</label>
+</div>
+
+<div class="question">
+    9. How many fingers are on one normal hand (including thumb)?<br>
+    <input type="radio" id="q9a" name="q9"><label for="q9a">4</label><br>
+    <input type="radio" id="q9b" name="q9"><label for="q9b">5</label><br>
+    <input type="radio" id="q9c" name="q9"><label for="q9c">6</label><br>
+    <input type="radio" id="q9d" name="q9"><label for="q9d">10</label>
+</div>
+
+<div class="question">
+    10. What is the opposite of hot?<br>
+    <input type="radio" id="q10a" name="q10"><label for="q10a">Warm</label><br>
+    <input type="radio" id="q10b" name="q10"><label for="q10b">Cold</label><br>
+    <input type="radio" id="q10c" name="q10"><label for="q10c">Cool</label><br>
+    <input type="radio" id="q10d" name="q10"><label for="q10d">Boiling</label>
+</div>
+
+<div class="question">
+    11. Which planet do we live on?<br>
+    <input type="radio" id="q11a" name="q11"><label for="q11a">Mars</label><br>
+    <input type="radio" id="q11b" name="q11"><label for="q11b">Earth</label><br>
+    <input type="radio" id="q11c" name="q11"><label for="q11c">Venus</label><br>
+    <input type="radio" id="q11d" name="q11"><label for="q11d">Jupiter</label>
+</div>
+
+<div class="question">
+    12. What color do you get when you mix red and blue?<br>
+    <input type="radio" id="q12a" name="q12"><label for="q12a">Green</label><br>
+    <input type="radio" id="q12b" name="q12"><label for="q12b">Purple</label><br>
+    <input type="radio" id="q12c" name="q12"><label for="q12c">Orange</label><br>
+    <input type="radio" id="q12d" name="q12"><label for="q12d">Yellow</label>
+</div>
+
+<div class="question">
+    13. How many seasons are there in a year (in most temperate regions)?<br>
+    <input type="radio" id="q13a" name="q13"><label for="q13a">2</label><br>
+    <input type="radio" id="q13b" name="q13"><label for="q13b">3</label><br>
+    <input type="radio" id="q13c" name="q13"><label for="q13c">4</label><br>
+    <input type="radio" id="q13d" name="q13"><label for="q13d">5</label>
+</div>
+
+<div class="question">
+    14. What is the currency of the United States?<br>
+    <input type="radio" id="q14a" name="q14"><label for="q14a">Euro</label><br>
+    <input type="radio" id="q14b" name="q14"><label for="q14b">Dollar</label><br>
+    <input type="radio" id="q14c" name="q14"><label for="q14c">Pound</label><br>
+    <input type="radio" id="q14d" name="q14"><label for="q14d">Yen</label>
+</div>
+
+<div class="question">
+    15. Which of these is a fruit?<br>
+    <input type="radio" id="q15a" name="q15"><label for="q15a">Carrot</label><br>
+    <input type="radio" id="q15b" name="q15"><label for="q15b">Potato</label><br>
+    <input type="radio" id="q15c" name="q15"><label for="q15c">Apple</label><br>
+    <input type="radio" id="q15d" name="q15"><label for="q15d">Broccoli</label>
+</div>
+
+<div class="question">
+    16. What animal is this?<br>
+    <img src="1.jpg" alt="Zebra" width="200"><br>
+    <input type="radio" id="q16a" name="q16"><label for="q16a">Elephant</label><br>
+    <input type="radio" id="q16b" name="q16"><label for="q16b">Zebra</label><br>
+    <input type="radio" id="q16c" name="q16"><label for="q16c">Giraffe</label><br>
+    <input type="radio" id="q16d" name="q16"><label for="q16d">Lion</label>
+</div>
+
+<div class="question">
+    17. What animal is this?<br>
+    <img src="2.jpg" alt="Lion" width="200"><br>
+    <input type="radio" id="q17a" name="q17"><label for="q17a">Tiger</label><br>
+    <input type="radio" id="q17b" name="q17"><label for="q17b">Lion</label><br>
+    <input type="radio" id="q17c" name="q17"><label for="q17c">Bear</label><br>
+    <input type="radio" id="q17d" name="q17"><label for="q17d">Elephant</label>
+</div>
+
+<div class="question">
+    18. What is shown in the image?<br>
+    <img src="3.jpg" alt="Moon" width="200"><br>
+    <input type="radio" id="q18a" name="q18"><label for="q18a">Sun</label><br>
+    <input type="radio" id="q18b" name="q18"><label for="q18b">Planet Earth</label><br>
+    <input type="radio" id="q18c" name="q18"><label for="q18c">Moon</label><br>
+    <input type="radio" id="q18d" name="q18"><label for="q18d">Star</label>
+</div>
+
+<div class="question">
+    19. Where is this location?<br>
+    <img src="4.jpg" alt="Eurasia Map" width="200"><br>
+    <input type="radio" id="q19a" name="q19"><label for="q19a">North America</label><br>
+    <input type="radio" id="q19b" name="q19"><label for="q19b">Europe</label><br>
+    <input type="radio" id="q19c" name="q19"><label for="q19c">Asia</label><br>
+    <input type="radio" id="q19d" name="q19"><label for="q19d">Eurasia</label>
+</div>
+
+<div class="question">
+    20. What type of object is shown?<br>
+    <img src="5.jpg" alt="Fossil" width="200"><br>
+    <input type="radio" id="q20a" name="q20"><label for="q20a">Rock</label><br>
+    <input type="radio" id="q20b" name="q20"><label for="q20b">Fossil</label><br>
+    <input type="radio" id="q20c" name="q20"><label for="q20c">Crystal</label><br>
+    <input type="radio" id="q20d" name="q20"><label for="q20d">Meteorite</label>
+</div>
+
+<button onclick="checkScore()">Submit Quiz</button>
+
+<div id="result" class="result-container" style="display:none;">
+    <div id="scoreSummary" class="score-summary"></div>
+    <div id="details"></div>
+</div>
+
+<script>
+function checkScore() {
+    const correctAnswers = {
+        q1:  "q1c",  
+        q2:  "q2a",  
+        q3:  "q3c",  
+        q4:  "q4b",  
+        q5:  "q5b",  
+        q6:  "q6c",  
+        q7:  "q7c",  
+        q8:  "q8b",  
+        q9:  "q9b",  
+        q10: "q10b", 
+        q11: "q11b",
+        q12: "q12b", 
+        q13: "q13c", 
+        q14: "q14b", 
+        q15: "q15c", 
+        q16: "q16b", 
+        q17: "q17b",
+        q18: "q18c", 
+        q19: "q19d", 
+        q20: "q20b"  
+    };
+
+    let score = 0;
+    let resultHTML = "";
+
+    for (let i = 1; i <= 20; i++) {
+        const name = "q" + i;
+        const selected = document.querySelector(`input[name="${name}"]:checked`);
+        const userId = selected ? selected.id : null;
+        const correctId = correctAnswers[name];
+
+        const correctLabel = document.querySelector(`label[for="${correctId}"]`)?.textContent.trim() || "—";
+        const userLabel  = userId ? document.querySelector(`label[for="${userId}"]`)?.textContent.trim() || "—" : "Not answered";
+
+        let status = "";
+        let className = "not-answered";
+
+        if (userId) {
+            if (userId === correctId) {
+                score++;
+                status = "Correct!";
+                className = "correct";
+            } else {
+                status = `Incorrect — Correct answer: ${correctLabel}`;
+                className = "incorrect";
+            }
+        } else {
+            status = `Not answered — Correct answer: ${correctLabel}`;
+        }
+
+        resultHTML += `
+            <div class="question-result ${className}">
+                <strong>Question ${i}</strong><br>
+                <strong>Your answer:</strong> ${userLabel}<br>
+                <strong>Result:</strong> ${status}
+            </div>
+        `;
+    }
+
+    document.getElementById("scoreSummary").innerHTML = `Your Score: ${score} out of 20`;
+    document.getElementById("details").innerHTML = resultHTML;
+    document.getElementById("result").style.display = "block";
+
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+
+    alert(`Your score is ${score} / 20\n\nScroll down to see which questions you got right or wrong.`);
+}
+</script>
+
+</body>
+</html>

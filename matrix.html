@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Synthesis Matrix & 25 Sources</title>
+  <style>
+    @page { size: landscape; margin: 1.5cm; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f0f2f5;
+      color: #333;
+      overflow: hidden;
+      touch-action: pan-y; /* Allows vertical scrolling if content overflows, but horizontal is controlled */
+    }
+    .container {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 2.5rem 3.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      pointer-events: none;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+    .slide.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #1a365d;
+      margin-bottom: 1.5rem;
+      font-size: 2.2rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin: 1rem 0;
+    }
+    th, td {
+      border: 1px solid #a0aec0;
+      padding: 0.55rem 0.75rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #2d3748;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    tr:nth-child(even) { background: #edf2f7; }
+    .references {
+      column-count: 2;
+      column-gap: 2.5rem;
+      font-size: 0.92rem;
+      line-height: 1.4;
+    }
+    .references li {
+      margin-bottom: 1.1rem;
+      break-inside: avoid;
+    }
+    @media (max-width: 1000px) {
+      .slide { padding: 1.8rem; }
+      table, .references { font-size: 0.82rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Slide 1: Synthesis Matrix -->
+    <div class="slide active" id="slide1">
+      <h1>Synthesis Matrix</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Author/Year</th>
+            <th>Focus</th>
+            <th>Method</th>
+            <th>Key Findings</th>
+            <th>Relevance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Awa et al., 2010</td><td>Burnout prevention programs</td><td>Literature review</td><td>Interventions can reduce burnout symptoms</td><td>Supports solutions/interventions</td></tr>
+          <tr><td>Maslach, 2017</td><td>Burnout solutions</td><td>Conceptual analysis</td><td>Organizational change needed</td><td>Theory foundation</td></tr>
+          <tr><td>WHO, 2019</td><td>Burnout classification</td><td>Policy report</td><td>Defines burnout occupationally</td><td>Definition</td></tr>
+          <tr><td>Toker & Biron, 2012</td><td>Burnout & depression</td><td>Longitudinal study</td><td>Burnout predicts depression</td><td>Mental health link</td></tr>
+          <tr><td>Hernandez, 2023</td><td>Academic stress</td><td>Survey</td><td>Stress affects performance</td><td>Student relevance</td></tr>
+          <tr><td>Hou & Dan, 2022</td><td>Student burnout</td><td>Quantitative</td><td>Stress predicts burnout</td><td>Relationship evidence</td></tr>
+          <tr><td>Kurniawan & Wardani, 2023</td><td>Sleep & burnout</td><td>Statistical</td><td>Burnout affects sleep</td><td>Health impact</td></tr>
+          <tr><td>Tian & Zhang, 2025</td><td>Adolescent burnout</td><td>Questionnaire</td><td>Behavioral outcomes linked</td><td>Social effect</td></tr>
+          <tr><td>Panagioti et al., 2017</td><td>Interventions</td><td>Meta-analysis</td><td>Interventions effective</td><td>Solutions</td></tr>
+          <tr><td>Cao et al., 2025</td><td>Educator burnout</td><td>Review</td><td>Programs reduce burnout</td><td>Education context</td></tr>
+          <tr><td>Zhang et al., 2023</td><td>Stress models</td><td>Model testing</td><td>Stress predicts burnout</td><td>Support model</td></tr>
+          <tr><td>Bianchini & Copeland, 2021</td><td>Mindfulness</td><td>Intervention</td><td>Reduces stress</td><td>Coping</td></tr>
+          <tr><td>Irvington Team, 2021</td><td>HS burnout</td><td>Research</td><td>High stress prevalence</td><td>Context</td></tr>
+          <tr><td>Ghasemi et al., 2023</td><td>Nursing burnout</td><td>Meta-analysis</td><td>Context factors matter</td><td>Comparison</td></tr>
+          <tr><td>Teodosio et al., 2025</td><td>Prediction models</td><td>ML</td><td>Risk predicted</td><td>Tech</td></tr>
+          <tr><td>Liu et al., 2022</td><td>Physician burnout</td><td>Deep learning</td><td>Data predicts burnout</td><td>Method</td></tr>
+          <tr><td>Ovi et al., 2025</td><td>Student monitoring</td><td>ML</td><td>Detect stress</td><td>Tools</td></tr>
+          <tr><td>Ang & Huan, 2006</td><td>Stress theory</td><td>Scale development</td><td>Measures stress</td><td>Framework</td></tr>
+          <tr><td>Kim & Jang, 2018</td><td>Stress-burnout</td><td>Correlation</td><td>Positive link</td><td>Validation</td></tr>
+          <tr><td>Gonzálvez et al., 2019</td><td>Stress outcomes</td><td>Survey</td><td>Affects adjustment</td><td>Outcome</td></tr>
+          <tr><td>Jiang et al., 2020</td><td>Coping</td><td>Modeling</td><td>Coping mediates</td><td>Process</td></tr>
+          <tr><td>Smith, 2021</td><td>Student stress</td><td>Survey</td><td>High prevalence</td><td>Data</td></tr>
+          <tr><td>Informed Health, 2020</td><td>Burnout overview</td><td>Report</td><td>Defines symptoms</td><td>Background</td></tr>
+          <tr><td>Hobfoll, 1989</td><td>Resource theory</td><td>Conceptual</td><td>Resource loss explains burnout</td><td>Theory</td></tr>
+          <tr><td>Eisenberg et al., 1998</td><td>Emotion socialization</td><td>Review</td><td>Parenting affects coping</td><td>Framework</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Slide 2: 25 Sources -->
+    <div class="slide" id="slide2">
+      <h1>25 Sources</h1>
+      <ol class="references">
+        <li>Awa, W. L., Plaumann, M., & Walter, U. (2010). Burnout prevention: A review of intervention programs. <em>Patient Education and Counseling</em>, 78(2), 184–190. https://doi.org/10.1016/j.pec.2009.04.008</li>
+        <li>Maslach, C. (2017). Finding solutions to the problem of burnout. <em>Consulting Psychology Journal: Practice and Research</em>, 69(2), 143–152. https://doi.org/10.1037/cpb0000090</li>
+        <li>World Health Organization. (2019). Burn-out an “occupational phenomenon”: International Classification of Diseases. https://www.who.int/news/item/28-05-2019-burn-out-an-occupational-phenomenon-international-classification-of-diseases</li>
+        <li>Toker, S., & Biron, M. (2012). Job burnout and depression. <em>Journal of Applied Psychology</em>, 97(3), 699–710. https://doi.org/10.1037/a0026914</li>
+        <li>Isagani S. Hernandez Jr. (2023). Academic stress in relation to academic performance of high school students in the new normal education. <em>American Journal of Humanities and Social Sciences Research</em>, 7(8), 146–171. https://www.ajhssr.com/wp-content/uploads/2023/08/P23708146171.pdf</li>
+        <li>Hou, X., & Dan, X. (2022). Academic stress and burnout among students. <em>Advances in Social Sciences Research Journal</em>, 9(5), 120–132.</li>
+        <li>Kurniawan, R., & Wardani, D. (2023). Academic stress, burnout, and sleep quality among university students.</li>
+        <li>Tian, L., & Zhang, X. (2025). Academic burnout and adolescent behavioral outcomes. <em>BMC Psychology</em>, 13(1).</li>
+        <li>Panagioti et al., 2017. Controlled interventions to reduce burnout in physicians. <em>JAMA Internal Medicine</em>, 177(2), 195–205.</li>
+        <li>Cao, J., et al. (2025). Interventions for reducing educator burnout. <em>Frontiers in Psychology</em>, 16.</li>
+        <li>Zhang, Y., et al. (2023). Academic stress and burnout models. <em>Frontiers in Psychology</em>, 14.</li>
+        <li>Bianchini, C., & Copeland, M. (2021). Mindfulness-based stress reduction outcomes. <em>Journal of Mental Health</em>, 30(2), 210–218.</li>
+        <li>Irvington High School Research Team. (2021). Burnout among high school students. <em>Research Archive Reports</em>, 5(1).</li>
+        <li>Ghasemi Kooktapeh, M., et al. (2023). Burnout prevalence meta-analysis. arXiv Preprint.</li>
+        <li>Teodosio, A., et al. (2025). Predicting burnout risk using machine learning models. arXiv Preprint.</li>
+        <li>Liu, J., et al. (2022). Predicting physician burnout from behavioral data. arXiv Preprint.</li>
+        <li>Ovi, P., et al. (2025). Monitoring student stress with machine learning. arXiv Preprint.</li>
+        <li>Ang, R. P., & Huan, V. S. (2006). Academic expectations stress inventory. <em>Educational Psychology</em>, 26(3), 365–379.</li>
+        <li>Kim, B., & Jang, H. (2018). Relationship between academic stress and burnout. <em>Psychological Reports</em>, 121(4), 718–735.</li>
+        <li>Gonzálvez, C., et al. (2019). Academic stress and adjustment outcomes. <em>International Journal of Environmental Research and Public Health</em>, 16(15).</li>
+        <li>Jiang, Y., et al. (2020). Structural relationships among stress and coping. <em>Frontiers in Psychology</em>, 11.</li>
+        <li>Smith, L. (2021). Stress levels in high school populations. <em>Student Research Journal</em>, 10(2).</li>
+        <li>Informed Health Institute. (2020). Understanding burnout syndrome and recovery. <em>Health Review Reports</em>, 12(1).</li>
+        <li>Hobfoll, S. E. (1989). Conservation of resources theory. <em>American Psychologist</em>, 44(3), 513–524.</li>
+        <li>Eisenberg, N., et al. (1998). Parental socialization of emotion. <em>Psychological Inquiry</em>, 9(4), 241–273.</li>
+      </ol>
+    </div>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+
+    // Slide change functions
+    function showSlide(index) {
+      slides.forEach((s, i) => s.classList.toggle('active', i === index));
+      current = index;
+    }
+
+    function nextSlide() {
+      showSlide((current + 1) % slides.length);
+    }
+
+    function prevSlide() {
+      showSlide((current - 1 + slides.length) % slides.length);
+    }
+
+    // Keyboard navigation (desktop)
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prevSlide();
+    });
+
+    // ── Mobile swipe support ────────────────────────────────────────────────
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const swipeThreshold = 50; // minimum pixels to count as swipe
+
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    document.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+      const diffX = touchStartX - touchEndX;
+
+      // Swipe left (next slide)
+      if (diffX > swipeThreshold) {
+        nextSlide();
+      }
+      // Swipe right (previous slide)
+      else if (diffX < -swipeThreshold) {
+        prevSlide();
+      }
+    }
+
+    // Initial slide
+    showSlide(0);
+  </script>
+
+</body>
+</html>
