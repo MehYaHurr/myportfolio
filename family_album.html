@@ -6,29 +6,13 @@
   <title>Jaime's Family Album • Forever Moments</title>
   <style>
     :root {
-      --bg-day: #fdfaf5;
-      --bg-night: #1e140c;
-      --card-day: #fffaf0;
-      --card-night: #2c1e14;
-      --text-day: #3d2b1f;
-      --text-night: #e8d5b7;
+      --bg: #fdfaf5;
+      --card: #fffaf0;
+      --text: #3d2b1f;
       --accent: #c19a6b;
-      --accent-night: #d4b897;
-      --shadow-day: rgba(139, 69, 19, 0.12);
-      --shadow-night: rgba(0, 0, 0, 0.5);
-      --glow-day: rgba(193, 154, 107, 0.25);
-      --glow-night: rgba(212, 184, 151, 0.4);
-      --frame-day: #e8d5b7;
-      --frame-night: #4a3828;
-    }
-
-    [data-theme="night"] {
-      --bg: var(--bg-night);
-      --card: var(--card-night);
-      --text: var(--text-night);
-      --shadow: var(--shadow-night);
-      --glow: var(--glow-night);
-      --frame: var(--frame-night);
+      --shadow: rgba(139, 69, 19, 0.12);
+      --glow: rgba(193, 154, 107, 0.25);
+      --frame: #e8d5b7;
     }
 
     * {
@@ -39,24 +23,22 @@
 
     body {
       font-family: 'Georgia', serif;
-      background: var(--bg-day);
-      color: var(--text-day);
-      line-height: 1.6;
-      min-height: 100vh;
-      padding: 5rem 1rem 2rem;
-      transition: background 0.6s ease, color 0.6s ease;
-    }
-
-    [data-theme="night"] body {
       background: var(--bg);
       color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 2rem 1rem;
     }
 
     header {
       text-align: center;
-      padding: 2rem 1rem;
-      position: relative;
-      margin-bottom: 3rem;
+      padding: 3rem 1rem 2rem;
+      background: linear-gradient(to bottom, rgba(253,250,245,0.95), rgba(253,250,245,0.8));
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(193,154,107,0.15);
     }
 
     h1 {
@@ -67,10 +49,6 @@
       letter-spacing: -0.5px;
     }
 
-    [data-theme="night"] h1 {
-      color: #d4b897;
-    }
-
     .subtitle {
       font-size: 1.3rem;
       color: #8d6e63;
@@ -79,43 +57,11 @@
       margin: 0 auto;
     }
 
-    [data-theme="night"] .subtitle {
-      color: #b89f7e;
-    }
-
-    .theme-toggle {
-      position: fixed;
-      top: 1.8rem;
-      right: 2rem;
-      background: var(--card-day);
-      border: none;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      font-size: 1.6rem;
-      cursor: pointer;
-      box-shadow: 0 6px 20px var(--shadow-day);
-      transition: all 0.4s ease;
-      z-index: 999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    [data-theme="night"] .theme-toggle {
-      background: var(--card-night);
-      box-shadow: 0 6px 20px var(--shadow-night);
-    }
-
-    .theme-toggle:hover {
-      transform: scale(1.15);
-    }
-
     .back-btn {
       position: fixed;
       top: 1.8rem;
       left: 2rem;
-      background: var(--card-day);
+      background: var(--card);
       color: var(--accent);
       border: 2px solid var(--accent);
       padding: 0.8rem 1.5rem;
@@ -126,28 +72,20 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      box-shadow: 0 6px 20px var(--shadow-day);
+      box-shadow: 0 6px 20px var(--shadow);
       transition: all 0.4s ease;
       z-index: 999;
-    }
-
-    [data-theme="night"] .back-btn {
-      background: var(--card-night);
-      color: var(--accent-night);
-      border-color: var(--accent-night);
-      box-shadow: 0 6px 20px var(--shadow-night);
     }
 
     .back-btn:hover {
       background: var(--accent);
       color: white;
       transform: translateY(-3px);
-      box-shadow: 0 12px 35px var(--glow-day);
+      box-shadow: 0 12px 35px var(--glow);
     }
 
-    [data-theme="night"] .back-btn:hover {
-      background: var(--accent-night);
-      box-shadow: 0 12px 35px var(--glow-night);
+    .back-btn:active {
+      transform: translateY(0);
     }
 
     .gallery {
@@ -198,19 +136,13 @@
     }
 
     .polaroid {
-      background: var(--card-day);
+      background: var(--card);
       padding: 1.2rem 1.2rem 2.2rem;
-      border: 1px solid var(--frame-day);
+      border: 1px solid var(--frame);
       border-radius: 6px;
-      box-shadow: 0 10px 30px var(--shadow-day);
+      box-shadow: 0 10px 30px var(--shadow);
       transform: rotate(0deg);
       transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    [data-theme="night"] .polaroid {
-      background: var(--card-night);
-      border-color: var(--frame-night);
-      box-shadow: 0 10px 30px var(--shadow-night);
     }
 
     .polaroid:nth-child(odd)  { transform: rotate(-2.5deg); }
@@ -218,13 +150,9 @@
 
     .polaroid:hover {
       transform: rotate(0deg) translateY(-14px) scale(1.07);
-      box-shadow: 0 25px 60px var(--shadow-day),
-                  0 0 0 8px var(--glow-day);
-    }
-
-    [data-theme="night"] .polaroid:hover {
-      box-shadow: 0 25px 60px var(--shadow-night),
-                  0 0 0 8px var(--glow-night);
+      box-shadow: 0 25px 60px var(--shadow),
+                  0 0 0 8px var(--glow);
+      z-index: 2;
     }
 
     .polaroid img {
@@ -236,20 +164,12 @@
       background: #f8f1e9;
     }
 
-    [data-theme="night"] .polaroid img {
-      background: #3a2a1e;
-    }
-
     .caption {
       text-align: center;
       font-size: 0.95rem;
       color: #8d6e63;
       font-style: italic;
       letter-spacing: 0.3px;
-    }
-
-    [data-theme="night"] .caption {
-      color: #b89f7e;
     }
 
     footer {
@@ -260,32 +180,23 @@
       border-top: 1px solid rgba(193,154,107,0.2);
     }
 
-    [data-theme="night"] footer {
-      color: #b89f7e;
-      border-top-color: rgba(212,184,151,0.2);
-    }
-
     @media (max-width: 1100px) { .gallery { columns: 320px 3; } }
     @media (max-width: 768px)  {
       .gallery { columns: 100%; }
       h1 { font-size: 2.6rem; }
-      .back-btn, .theme-toggle {
+      .back-btn {
         top: 1.2rem;
+        left: 1.2rem;
         padding: 0.7rem 1.3rem;
         font-size: 0.95rem;
       }
-      .back-btn { left: 1.2rem; }
-      .theme-toggle { right: 1.2rem; width: 44px; height: 44px; font-size: 1.4rem; }
     }
   </style>
 </head>
-<body data-theme="day">
+<body>
 
-  <!-- Back Button -->
+  <!-- Back to Family button -->
   <a href="family.html" class="back-btn">← Back to Family</a>
-
-  <!-- Theme Toggle -->
-  <button class="theme-toggle" aria-label="Toggle theme">☀️</button>
 
   <header>
     <h1>Jaime's Family Album</h1>
@@ -422,24 +333,6 @@
   <footer>
     <p>Family — where life begins and love never ends • Jaime</p>
   </footer>
-
-  <script>
-    const toggle = document.querySelector('.theme-toggle');
-    const body = document.body;
-
-    // Load saved theme or default to day
-    const savedTheme = localStorage.getItem('familyTheme') || 'day';
-    body.setAttribute('data-theme', savedTheme);
-    toggle.textContent = savedTheme === 'night' ? '🌙' : '☀️';
-
-    toggle.addEventListener('click', () => {
-      const current = body.getAttribute('data-theme');
-      const next = current === 'night' ? 'day' : 'night';
-      body.setAttribute('data-theme', next);
-      toggle.textContent = next === 'night' ? '🌙' : '☀️';
-      localStorage.setItem('familyTheme', next);
-    });
-  </script>
 
 </body>
 </html>
