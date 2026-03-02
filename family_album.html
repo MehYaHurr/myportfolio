@@ -15,12 +15,7 @@
       --frame: #e8d5b7;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family: 'Georgia', serif;
       background: var(--bg);
@@ -29,7 +24,6 @@
       min-height: 100vh;
       padding: 2rem 1rem;
     }
-
     header {
       text-align: center;
       padding: 3rem 1rem 2rem;
@@ -40,7 +34,6 @@
       backdrop-filter: blur(8px);
       border-bottom: 1px solid rgba(193,154,107,0.15);
     }
-
     h1 {
       font-size: 3.2rem;
       font-weight: 700;
@@ -48,7 +41,6 @@
       margin-bottom: 0.4rem;
       letter-spacing: -0.5px;
     }
-
     .subtitle {
       font-size: 1.3rem;
       color: #8d6e63;
@@ -56,7 +48,6 @@
       max-width: 700px;
       margin: 0 auto;
     }
-
     .back-btn {
       position: fixed;
       top: 1.8rem;
@@ -76,25 +67,18 @@
       transition: all 0.4s ease;
       z-index: 999;
     }
-
     .back-btn:hover {
       background: var(--accent);
       color: white;
       transform: translateY(-3px);
       box-shadow: 0 12px 35px var(--glow);
     }
-
-    .back-btn:active {
-      transform: translateY(0);
-    }
-
     .gallery {
       columns: 320px 4;
       column-gap: 1.8rem;
       max-width: 1700px;
       margin: 0 auto 4rem;
     }
-
     .item {
       break-inside: avoid;
       margin-bottom: 1.8rem;
@@ -104,7 +88,6 @@
       animation: fadeUp 1.2s forwards;
       animation-timing-function: ease-out;
     }
-
     .item:nth-child(1)  { animation-delay: 0.1s; }
     .item:nth-child(2)  { animation-delay: 0.2s; }
     .item:nth-child(3)  { animation-delay: 0.3s; }
@@ -144,17 +127,13 @@
       transform: rotate(0deg);
       transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-
     .polaroid:nth-child(odd)  { transform: rotate(-2.5deg); }
     .polaroid:nth-child(even) { transform: rotate(3deg); }
-
     .polaroid:hover {
       transform: rotate(0deg) translateY(-14px) scale(1.07);
-      box-shadow: 0 25px 60px var(--shadow),
-                  0 0 0 8px var(--glow);
+      box-shadow: 0 25px 60px var(--shadow), 0 0 0 8px var(--glow);
       z-index: 2;
     }
-
     .polaroid img {
       width: 100%;
       height: auto;
@@ -163,7 +142,6 @@
       margin-bottom: 1rem;
       background: #f8f1e9;
     }
-
     .caption {
       text-align: center;
       font-size: 0.95rem;
@@ -171,7 +149,6 @@
       font-style: italic;
       letter-spacing: 0.3px;
     }
-
     footer {
       text-align: center;
       padding: 3rem 1rem;
@@ -179,7 +156,6 @@
       font-size: 1.1rem;
       border-top: 1px solid rgba(193,154,107,0.2);
     }
-
     @media (max-width: 1100px) { .gallery { columns: 320px 3; } }
     @media (max-width: 768px)  {
       .gallery { columns: 100%; }
@@ -195,7 +171,6 @@
 </head>
 <body>
 
-  <!-- Back to Family button -->
   <a href="family.html" class="back-btn">← Back to Family</a>
 
   <header>
@@ -204,6 +179,7 @@
   </header>
 
   <div class="gallery">
+
     <div class="item"><div class="polaroid">
       <img src="./family/img (1).jpg" alt="Our beginning" loading="lazy">
       <div class="caption">Our beginning</div>
@@ -328,6 +304,7 @@
       <img src="./family/img (25).jpg" alt="Home is wherever we are" loading="lazy">
       <div class="caption">Home is wherever we are</div>
     </div></div>
+
   </div>
 
   <footer>
