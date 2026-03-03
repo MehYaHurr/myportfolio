@@ -18,16 +18,20 @@
 
     * { margin:0; padding:0; box-sizing:border-box; }
 
+    html, body {
+      height: 100%;
+    }
+
     body {
       font-family: 'Cinzel', serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
-      padding: 1.5rem 1rem;
-      overflow-y: auto;
+      padding: 2rem 1rem;
+      overflow-y: scroll;
       position: relative;
     }
 
@@ -53,21 +57,24 @@
     .container {
       text-align: center;
       z-index: 2;
+      width: 100%;
       max-width: 620px;
-      padding: 3rem 1.8rem;
+      padding: 2.5rem 1.8rem;
       background: var(--card);
       border-radius: 6px;
       border: 1px solid var(--border);
       box-shadow: 0 0 80px #000, inset 0 0 60px rgba(0,0,0,0.7);
+      margin: auto;
     }
 
     h1 {
       font-family: 'Cinzel Decorative', cursive;
-      font-size: clamp(4rem, 10vw, 6.5rem);
+      font-size: clamp(2rem, 8vw, 3.8rem);
       color: #3c1a1a;
       text-shadow: 0 0 30px rgba(70,20,20,0.5), 0 0 60px rgba(50,10,10,0.3);
       margin-bottom: 1rem;
-      letter-spacing: 10px;
+      letter-spacing: 6px;
+      line-height: 1.2;
       animation: faint-pulse 12s infinite alternate;
     }
 
@@ -77,9 +84,9 @@
     }
 
     .subtitle {
-      font-size: 1.4rem;
+      font-size: 1rem;
       color: var(--text-dim);
-      margin: 1.8rem 0 3rem;
+      margin: 1.2rem 0 2rem;
       letter-spacing: 1.5px;
       text-shadow: 1px 1px 6px #000;
     }
@@ -88,25 +95,25 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 1.4rem 2rem;
-      margin: 1rem 0 3rem;
+      gap: 1rem 1.5rem;
+      margin: 1rem 0 2rem;
     }
 
     .auth-buttons {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 1.6rem 2.4rem;
-      margin-top: 2.5rem;
-      padding-top: 2.2rem;
+      gap: 1.2rem 2rem;
+      margin-top: 2rem;
+      padding-top: 2rem;
       border-top: 1px solid #1a0f0f;
     }
 
     .btn {
       display: inline-block;
-      padding: 1.1rem 2.6rem;
-      min-width: 220px;
-      font-size: 1.3rem;
+      padding: 0.9rem 2rem;
+      min-width: 180px;
+      font-size: 1.1rem;
       font-weight: 700;
       text-decoration: none;
       border-radius: 4px;
