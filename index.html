@@ -11,14 +11,13 @@
       --card: rgba(6, 6, 8, 0.96);
       --accent: #4a0e0e;
       --accent-hover: #6b1818;
+      --accent-glow: #9b2c2c;
       --text: #a89e94;
       --text-dim: #5c554a;
       --border: #1a0f0f;
       --shadow: #000000;
       --particle: rgba(140, 130, 120, 0.07);
       --particle-glow: rgba(160, 150, 140, 0.04);
-      --red-btn: #c0392b;
-      --red-btn-hover: #e74c3c;
     }
 
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -109,8 +108,10 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 1.8rem 2.5rem;
-      margin-top: 1rem;
+      gap: 1.6rem 2.4rem;
+      margin-top: 2.5rem;
+      padding-top: 2.2rem;
+      border-top: 1px solid #1a0f0f;
     }
 
     .btn {
@@ -120,8 +121,8 @@
       font-size: 1.3rem;
       font-weight: 700;
       text-decoration: none;
-      border-radius: 6px;
-      border: 1px solid var(--border);
+      border-radius: 4px;
+      border: 1px solid #1a0f0f;
       box-shadow: 0 6px 0 #000, inset 0 -2px rgba(0,0,0,0.8);
       transition: all 0.3s ease;
       position: relative;
@@ -138,30 +139,25 @@
       border-color: #3c1a1a;
     }
 
-    .btn-red {
-      padding: 1.05rem 2.8rem;
-      min-width: 180px;
-      font-size: 1.3rem;
-      font-weight: 700;
-      background: var(--red-btn);
-      color: white;
-      border: 3px solid #000;
-      border-radius: 8px 12px 6px 14px;   /* irregular edges like sketch */
-      box-shadow: none;
-      transition: all 0.25s ease;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+    /* Red theme for auth buttons */
+    .btn-auth {
+      background: linear-gradient(145deg, #3a1818, #2a0f0f);
+      color: #d4a0a0;
+      border: 1px solid #5c2424;
+      box-shadow: 0 6px 0 #000, inset 0 -3px rgba(0,0,0,0.7), 0 0 16px rgba(120, 30, 30, 0.25);
     }
 
-    .btn-red:hover {
-      background: var(--red-btn-hover);
-      transform: translateY(-3px) scale(1.03);
-      box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
-      border-color: #222;
+    .btn-auth:hover {
+      background: linear-gradient(145deg, #4f2222, #3a1818);
+      color: #ffcccc;
+      border-color: #7a3232;
+      box-shadow: 0 12px 0 #000, 0 0 28px rgba(140, 40, 40, 0.45);
+      transform: translateY(-4px);
     }
 
-    .btn-red:active {
-      transform: translateY(1px);
+    .btn:active {
+      transform: translateY(-1px);
+      box-shadow: 0 3px 0 #000;
     }
   </style>
 </head>
@@ -181,8 +177,8 @@
   </div>
 
   <div class="auth-buttons">
-    <a href="signin.html" class="btn btn-red">Sign In</a>
-    <a href="signup.html" class="btn btn-red">Sign Up</a>
+    <a href="signin.html"  class="btn btn-auth">Sign In</a>
+    <a href="signup.html" class="btn btn-auth">Sign Up</a>
   </div>
 </div>
 
