@@ -139,7 +139,6 @@
       border-color: #3c1a1a;
     }
 
-    /* Red theme for auth buttons */
     .btn-auth {
       background: linear-gradient(145deg, #3a1818, #2a0f0f);
       color: #d4a0a0;
@@ -177,7 +176,7 @@
   </div>
 
   <div class="auth-buttons">
-    <a href="signin.html"  class="btn btn-auth">Sign In</a>
+    <a href="signin.html" class="btn btn-auth">Sign In</a>
     <a href="signup.html" class="btn btn-auth">Sign Up</a>
   </div>
 </div>
@@ -191,7 +190,7 @@ function createParticle() {
   p.style.width = p.style.height = size + 'px';
   p.style.left = Math.random() * 100 + 'vw';
   p.style.bottom = '-10px';
-  p.style.animationDuration = (Math.random() * 40 + 35) + 's';
+  p.style.animationDuration = (Math.random() * 40 + 35) + 's';   // very slow
   p.style.animationDelay = Math.random() * 10 + 's';
   document.getElementById('particles').appendChild(p);
   setTimeout(() => p.remove(), 60000);
