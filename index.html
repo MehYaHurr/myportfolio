@@ -13,10 +13,12 @@
       --accent-hover: #6b1818;
       --text: #a89e94;
       --text-dim: #5c554a;
-      --border: #2a1a1a;
+      --border: #1a0f0f;
       --shadow: #000000;
       --particle: rgba(140, 130, 120, 0.07);
       --particle-glow: rgba(160, 150, 140, 0.04);
+      --red-btn: #c0392b;
+      --red-btn-hover: #e74c3c;
     }
 
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -62,34 +64,36 @@
     .container {
       text-align: center;
       z-index: 2;
-      max-width: 720px;
-      padding: 3.5rem 2rem;
+      max-width: 620px;
+      padding: 3rem 1.8rem;
       background: var(--card);
-      border-radius: 8px;
+      border-radius: 6px;
       border: 1px solid var(--border);
-      box-shadow: 0 0 80px #000, inset 0 0 60px rgba(0,0,0,0.75);
+      box-shadow: 0 0 80px #000, inset 0 0 60px rgba(0,0,0,0.7);
     }
 
     h1 {
       font-family: 'Cinzel Decorative', cursive;
-      font-size: clamp(4.5rem, 12vw, 7.5rem);
+      font-size: clamp(4rem, 10vw, 6.5rem);
       color: #3c1a1a;
-      text-shadow: 0 0 30px rgba(70,20,20,0.5), 0 0 60px rgba(50,10,10,0.3);
-      margin-bottom: 1.2rem;
-      letter-spacing: 12px;
-      animation: faint-pulse 14s infinite alternate;
+      text-shadow: 
+        0 0 30px rgba(70, 20, 20, 0.5),
+        0 0 60px rgba(50, 10, 10, 0.3);
+      margin-bottom: 1rem;
+      letter-spacing: 10px;
+      animation: faint-pulse 12s infinite alternate;
     }
 
     @keyframes faint-pulse {
       from { text-shadow: 0 0 30px rgba(70,20,20,0.5), 0 0 60px rgba(50,10,10,0.3); }
-      to   { text-shadow: 0 0 55px rgba(90,30,30,0.4), 0 0 100px rgba(60,15,15,0.25); }
+      to   { text-shadow: 0 0 50px rgba(90,30,30,0.4), 0 0 90px rgba(60,15,15,0.25); }
     }
 
     .subtitle {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       color: var(--text-dim);
-      margin: 1.8rem 0 3.5rem;
-      letter-spacing: 1.8px;
+      margin: 1.8rem 0 3rem;
+      letter-spacing: 1.5px;
       text-shadow: 1px 1px 6px #000;
     }
 
@@ -97,100 +101,67 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 2rem 3rem;
-      margin: 2rem 0;
+      gap: 1.4rem 2rem;
+      margin: 1rem 0 3rem;
     }
 
     .auth-buttons {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 3rem 4rem;
-      margin-top: 3.5rem;
-      padding-top: 2.5rem;
-      border-top: 1px dashed #2a1a1a;
+      gap: 1.8rem 2.5rem;
+      margin-top: 1rem;
     }
 
     .btn {
-      position: relative;
       display: inline-block;
-      padding: 1.2rem 2.8rem;
-      min-width: 200px;
-      font-size: 1.35rem;
+      padding: 1.1rem 2.6rem;
+      min-width: 220px;
+      font-size: 1.3rem;
       font-weight: 700;
       text-decoration: none;
-      color: #a89e94;
-      background: #0f0f0f;
-      border: 2px solid #2a1a1a;
-      box-shadow: 0 6px 0 #000, inset 0 -3px rgba(0,0,0,0.9);
-      transition: all 0.25s ease;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      box-shadow: 0 6px 0 #000, inset 0 -2px rgba(0,0,0,0.8);
+      transition: all 0.3s ease;
+      position: relative;
       overflow: hidden;
+      background: #0f0f0f;
+      color: #8c8278;
     }
 
     .btn:hover {
-      transform: translateY(-5px) rotate(1deg);
-      box-shadow: 0 14px 0 #000, 0 0 25px rgba(60,20,20,0.3);
-      color: #d4c0a8;
-      border-color: #4a2a2a;
-    }
-
-    .btn:active {
-      transform: translateY(-1px);
-      box-shadow: 0 3px 0 #000;
-    }
-
-    /* Rectangular with slight unevenness */
-    .btn-rect {
-      border-radius: 6px 9px 7px 11px; /* asymmetric corners */
-    }
-
-    /* Torn / wavy bottom - Family */
-    .btn-torn {
-      border-radius: 8px 8px 24px 8px;
-      clip-path: polygon(0 0, 100% 0, 100% 75%, 92% 88%, 80% 94%, 65% 98%, 45% 96%, 28% 92%, 12% 86%, 0 78%);
-    }
-
-    /* Personal - subtle torn look */
-    .btn-personal {
-      border-radius: 10px 6px 12px 8px;
-      clip-path: polygon(4% 0, 100% 0, 100% 100%, 0 100%, 0 18%);
-    }
-
-    /* Sign In - slanted left cut */
-    .btn-signin {
-      clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%);
-      transform: skewX(-8deg);
-      padding-left: 3.2rem;
-      padding-right: 2.4rem;
-    }
-
-    /* Sign Up - strong diagonal wedge right */
-    .btn-signup {
-      clip-path: polygon(0 0, 88% 0, 100% 100%, 0 100%);
-      background: #2a0f0f;
-      color: #b87a7a;
-      border-color: #4a1a1a;
-      transform: skewX(12deg);
-      padding-right: 3.8rem;
-      padding-left: 2rem;
-    }
-
-    .btn-signup:hover {
-      background: #3c1818;
-      color: #d48c8c;
-      border-color: #6b2424;
-      box-shadow: 0 14px 0 #000, 0 0 30px rgba(100,20,20,0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 0 #000;
+      background: #161616;
+      color: #b8a894;
+      border-color: #3c1a1a;
     }
 
     .btn-red {
-      background: #2a0f0f;
-      color: #a86969;
-      border-color: #4a1a1a;
+      padding: 1.05rem 2.8rem;
+      min-width: 180px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      background: var(--red-btn);
+      color: white;
+      border: 3px solid #000;
+      border-radius: 8px 12px 6px 14px;   /* irregular edges like sketch */
+      box-shadow: none;
+      transition: all 0.25s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .btn-red:hover {
-      background: #3c1818;
-      color: #d48c8c;
+      background: var(--red-btn-hover);
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
+      border-color: #222;
+    }
+
+    .btn-red:active {
+      transform: translateY(1px);
     }
   </style>
 </head>
@@ -203,20 +174,20 @@
   <p class="subtitle">Fading echoes in an endless dark...</p>
 
   <div class="buttons">
-    <a href="collection" class="btn btn-rect">Collection</a>
-    <a href="education" class="btn btn-rect">Education</a>
-    <a href="family"    class="btn btn-torn">Family</a>
-    <a href="personal"  class="btn btn-personal">Personal</a>
+    <a href="collection" class="btn">Collection</a>
+    <a href="Education" class="btn">Education</a>
+    <a href="family" class="btn">Family</a>
+    <a href="persona1" class="btn">Persona I</a>
   </div>
 
   <div class="auth-buttons">
-    <a href="signin.html"  class="btn btn-signin btn-red">Sign In</a>
-    <a href="signup.html"  class="btn btn-signup btn-red">Sign Up</a>
+    <a href="signin.html" class="btn btn-red">Sign In</a>
+    <a href="signup.html" class="btn btn-red">Sign Up</a>
   </div>
 </div>
 
 <script>
-// Particles (unchanged)
+// Slow drifting dust / ash particles
 function createParticle() {
   const p = document.createElement('div');
   p.className = 'particle';
@@ -231,6 +202,7 @@ function createParticle() {
 }
 setInterval(createParticle, 800);
 
+// Auto-redirect if already logged in
 if (localStorage.getItem("currentUser")) {
   window.location.href = "feed.html";
 }
