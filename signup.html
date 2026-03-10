@@ -219,6 +219,32 @@
       color: #ef5350;
     }
 
+    /* ── Home Button ── */
+    .home-btn {
+      display: inline-block;
+      margin-top: 1.4rem;
+      padding: 0.75rem 2rem;
+      background: transparent;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      color: var(--text-muted);
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 0 #000;
+    }
+
+    .home-btn:hover {
+      color: var(--text);
+      border-color: var(--accent);
+      background: rgba(211, 47, 47, 0.12);
+      box-shadow: 0 6px 0 #000, 0 0 18px rgba(211,47,47,0.3);
+      transform: translateY(-3px);
+    }
+
     @media (max-width: 500px) {
       body { padding: 1.5rem 1rem; }
       .card { padding: 2.5rem 1.8rem; }
@@ -275,11 +301,15 @@
     <div class="signin-link">
       Already burning? <a href="signin.html">Sign In</a>
     </div>
+
+    <div style="text-align:center;">
+      <a href="index.html" class="home-btn">Return to the Bonfire</a>
+    </div>
+
   </div>
 </div>
 
 <script>
-// Floating Embers
 const embersContainer = document.getElementById('embers');
 let activeParticles = 0;
 const MAX_PARTICLES = 40;
@@ -315,7 +345,6 @@ function createEmber() {
 
 setInterval(createEmber, 800 + Math.random() * 400);
 
-// Form logic
 const form = document.getElementById('signupForm');
 const usernameInput = document.getElementById('username');
 const emailInput = document.getElementById('email');
@@ -414,8 +443,8 @@ form.addEventListener('submit', e => {
   const user = {
     username,
     email,
-    password,                // saved normally
-    role: email === "jaimericardos24@gmail.com" ? "admin" : "user"   // ← ADMIN CHECK HERE
+    password,
+    role: email === "jaimericardos24@gmail.com" ? "admin" : "user"
   };
 
   localStorage.setItem(`flame_${email}`, JSON.stringify(user));

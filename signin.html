@@ -7,6 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
   <style>
     :root {
+      --bg: #0c0a14 url('https://images.unsplash.com/photo-1551029506-0807df4cb8ed?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=90') center/cover fixed no-repeat;
       --card: rgba(20, 12, 28, 0.90);
       --accent: #d32f2f;
       --accent-dark: #b71c1c;
@@ -15,6 +16,7 @@
       --border: #3f1e38;
       --glow: rgba(211, 47, 47, 0.45);
       --error: #f44336;
+      --success: #66bb6a;
       --overlay: radial-gradient(circle at center, #7f0000 10%, #000 70%);
       --soul-particle: rgba(240, 240, 255, 0.35);
     }
@@ -23,15 +25,22 @@
 
     body {
       font-family: 'Cinzel', serif;
-      background: #0c0a14;
+      background: var(--bg);
       color: var(--text);
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 1.5rem;
+      background-attachment: fixed;
       overflow: hidden;
       position: relative;
+      animation: hollow-drain 60s infinite alternate ease-in-out;
+    }
+
+    @keyframes hollow-drain {
+      0%   { filter: grayscale(0%) brightness(1) contrast(1.05); }
+      100% { filter: grayscale(35%) brightness(0.85) contrast(0.92); }
     }
 
     body::after {
@@ -222,6 +231,32 @@
       color: #ef5350;
     }
 
+    /* ── Home Button ── */
+    .home-btn {
+      display: inline-block;
+      margin-top: 1.4rem;
+      padding: 0.75rem 2rem;
+      background: transparent;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      color: var(--text-muted);
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 0 #000;
+    }
+
+    .home-btn:hover {
+      color: var(--text);
+      border-color: var(--accent);
+      background: rgba(211, 47, 47, 0.12);
+      box-shadow: 0 6px 0 #000, 0 0 18px rgba(211,47,47,0.3);
+      transform: translateY(-3px);
+    }
+
     .overlay {
       position: fixed;
       inset: 0;
@@ -276,41 +311,180 @@
 
   <div class="particles" id="particles"></div>
 
-  <div class="container">
-    <div class="card">
-      <h1>ENTER</h1>
-      <p class="subtitle">Do not go hollow...</p>
+<div class="container">
+  <div class="card">
+    <h1>ENTER</h1>
+    <p class="subtitle">Do not go hollow...</p>
 
-      <form id="signinForm" novalidate>
+    <form id="signinForm" novalidate>
 
-        <div class="form-group">
-          <label for="email">Soul Identifier (Gmail only)</label>
-          <input type="email" id="email" required autocomplete="email" placeholder="yourname@gmail.com">
-          <div class="error-message" id="emailError"></div>
-        </div>
-
-        <div class="form-group">
-          <label for="password">Cursed Word</label>
-          <div class="password-wrapper">
-            <input type="password" id="password" required autocomplete="current-password" placeholder="••••••••">
-            <button type="button" class="toggle-password" id="toggleBtn">👁</button>
-          </div>
-          <div class="error-message" id="passwordError"></div>
-        </div>
-
-        <button type="submit" class="btn" id="submitBtn" disabled>ENTER THE ABYSS</button>
-      </form>
-
-      <div class="link-text">
-        Still unlinked? <a href="signup.html">kindle humanity → Sign up</a>
+      <div class="form-group">
+        <label for="email">Soul Identifier (Gmail only)</label>
+        <input type="email" id="email" required autocomplete="email" placeholder="yourname@gmail.com">
+        <div class="error-message" id="emailError"></div>
       </div>
+
+      <div class="form-group">
+        <label for="password">Cursed Word</label>
+        <div class="password-wrapper">
+          <input type="password" id="password" required autocomplete="current-password" placeholder="••••••••">
+          <button type="button" class="toggle-password" id="toggleBtn">👁</button>
+        </div>
+        <div class="error-message" id="passwordError"></div>
+      </div>
+
+      <button type="submit" class="btn" id="submitBtn" disabled>ENTER THE ABYSS</button>
+    </form>
+
+    <div class="link-text">
+      Still unlinked? <a href="signup.html">kindle humanity → Sign up</a>
     </div>
-  </div>
 
-  <div id="portalOverlay" class="overlay"></div>
-  <div id="loadingOverlay" class="overlay">
-    <div class="loading-text">Traversing the Abyss...</div>
-  </div>
+    <div style="text-align:center;">
+      <a href="index.html" class="home-btn">Return to the Bonfire</a>
+    </div>
 
+  </div>
+</div>
+
+<div id="portalOverlay" class="overlay"></div>
+<div id="loadingOverlay" class="overlay">
+  <div class="loading-text">Traversing the Abyss...</div>
+</div>
+
+<script>
+  const form = document.getElementById('signinForm');
+  const emailInput = document.getElementById('email');
+  const pwInput = document.getElementById('password');
+  const submitBtn = document.getElementById('submitBtn');
+  const emailError = document.getElementById('emailError');
+  const pwError = document.getElementById('passwordError');
+  const toggleBtn = document.getElementById('toggleBtn');
+
+  toggleBtn.addEventListener('click', () => {
+    const hidden = pwInput.type === 'password';
+    pwInput.type = hidden ? 'text' : 'password';
+    toggleBtn.textContent = hidden ? '🙈' : '👁';
+  });
+
+  function createParticle() {
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+    const size     = Math.random() * 4 + 2;
+    const left     = Math.random() * 100;
+    const duration = Math.random() * 25 + 20;
+    const delay    = Math.random() * 10;
+    particle.style.width             = `${size}px`;
+    particle.style.height            = `${size}px`;
+    particle.style.left              = `${left}vw`;
+    particle.style.animationDuration = `${duration}s`;
+    particle.style.animationDelay    = `${delay}s`;
+    document.getElementById('particles').appendChild(particle);
+    setTimeout(() => particle.remove(), (duration + 1) * 1000);
+  }
+
+  setInterval(createParticle, 800);
+
+  function validate() {
+    const email = emailInput.value.trim().toLowerCase();
+    let valid = true;
+
+    if (!email) {
+      emailError.textContent = "The soul identifier is required";
+      valid = false;
+    } else if (!email.endsWith('@gmail.com')) {
+      emailError.textContent = "Only Gmail addresses are bound to this realm";
+      valid = false;
+    } else {
+      emailError.textContent = "";
+    }
+
+    if (!pwInput.value) {
+      pwError.textContent = "Speak the cursed word";
+      valid = false;
+    } else {
+      pwError.textContent = "";
+    }
+
+    submitBtn.disabled = !valid;
+  }
+
+  [emailInput, pwInput].forEach(el => el.addEventListener('input', validate));
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (submitBtn.disabled) return;
+
+    const email = emailInput.value.trim().toLowerCase();
+    const password = pwInput.value;
+
+    console.log("[SIGNIN] Attempt with:", email);
+
+    const stored = localStorage.getItem(`flame_${email}`);
+    console.log("[SIGNIN] Stored data exists?", !!stored);
+
+    if (!stored) {
+      emailError.textContent = "No soul bears this mark in the registry";
+      pwError.textContent = "";
+      console.warn("[SIGNIN] No account found for this email");
+      return;
+    }
+
+    let user;
+    try {
+      user = JSON.parse(stored);
+      console.log("[SIGNIN] Parsed user:", user);
+    } catch (err) {
+      console.error("[SIGNIN] Failed to parse stored user data", err);
+      emailError.textContent = "Account data corrupted – please sign up again";
+      return;
+    }
+
+    if (user.password !== password) {
+      pwError.textContent = "The cursed word is incorrect... try again";
+      emailError.textContent = "";
+      console.warn("[SIGNIN] Password mismatch");
+      return;
+    }
+
+    console.log("[SIGNIN] Password correct – saving currentUser");
+
+    localStorage.setItem("currentUser", JSON.stringify({
+      username: user.username || email.split('@')[0],
+      email: email,
+      role: user.role || "user"
+    }));
+
+    console.log("[SIGNIN] currentUser saved:", localStorage.getItem("currentUser"));
+
+    const portal = document.getElementById('portalOverlay');
+    const loading = document.getElementById('loadingOverlay');
+
+    portal.classList.add('active');
+
+    setTimeout(() => {
+      loading.classList.add('active');
+      setTimeout(() => {
+        alert("Login successful – redirecting to feed.html now\n\nIf page doesn't change:\n1. Check console (F12)\n2. Make sure file is named exactly feed.html\n3. Try opening in new tab manually");
+        try {
+          window.location.href = "feed.html";
+          setTimeout(() => {
+            if (document.hasFocus()) window.location.replace("feed.html");
+          }, 800);
+        } catch (err) {
+          console.error("[SIGNIN] Redirect threw error:", err);
+          alert("Redirect failed: " + err.message + "\n\nCheck if feed.html exists in same folder");
+        }
+      }, 2800);
+    }, 1600);
+  });
+
+  if (localStorage.getItem("currentUser")) {
+    console.log("[SIGNIN] Already logged in – auto-redirect");
+    window.location.href = "feed.html";
+  }
+
+  validate();
+</script>
 </body>
 </html>
