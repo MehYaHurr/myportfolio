@@ -31,9 +31,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 1.5rem;
+      padding: 2rem 1.5rem;
       background-attachment: fixed;
-      overflow: hidden;
+      overflow-y: auto; /* ← FIXED: was overflow:hidden which blocked the button */
+      -webkit-overflow-scrolling: touch;
       position: relative;
       animation: hollow-drain 60s infinite alternate ease-in-out;
     }
@@ -82,7 +83,13 @@
       100% { transform: translateY(-20vh) scale(0.8); opacity: 0; }
     }
 
-    .container { width: 100%; max-width: 480px; z-index: 2; position: relative; }
+    .container {
+      width: 100%;
+      max-width: 480px;
+      z-index: 2;
+      position: relative;
+      margin: 2rem 0;
+    }
 
     .card {
       background: var(--card);
@@ -418,24 +425,18 @@
     const email = emailInput.value.trim().toLowerCase();
     const password = pwInput.value;
 
-    console.log("[SIGNIN] Attempt with:", email);
-
     const stored = localStorage.getItem(`flame_${email}`);
-    console.log("[SIGNIN] Stored data exists?", !!stored);
 
     if (!stored) {
       emailError.textContent = "No soul bears this mark in the registry";
       pwError.textContent = "";
-      console.warn("[SIGNIN] No account found for this email");
       return;
     }
 
     let user;
     try {
       user = JSON.parse(stored);
-      console.log("[SIGNIN] Parsed user:", user);
     } catch (err) {
-      console.error("[SIGNIN] Failed to parse stored user data", err);
       emailError.textContent = "Account data corrupted – please sign up again";
       return;
     }
@@ -443,19 +444,14 @@
     if (user.password !== password) {
       pwError.textContent = "The cursed word is incorrect... try again";
       emailError.textContent = "";
-      console.warn("[SIGNIN] Password mismatch");
       return;
     }
-
-    console.log("[SIGNIN] Password correct – saving currentUser");
 
     localStorage.setItem("currentUser", JSON.stringify({
       username: user.username || email.split('@')[0],
       email: email,
       role: user.role || "user"
     }));
-
-    console.log("[SIGNIN] currentUser saved:", localStorage.getItem("currentUser"));
 
     const portal = document.getElementById('portalOverlay');
     const loading = document.getElementById('loadingOverlay');
@@ -465,14 +461,12 @@
     setTimeout(() => {
       loading.classList.add('active');
       setTimeout(() => {
-        alert("Login successful – redirecting to feed.html now\n\nIf page doesn't change:\n1. Check console (F12)\n2. Make sure file is named exactly feed.html\n3. Try opening in new tab manually");
         try {
           window.location.href = "feed.html";
           setTimeout(() => {
             if (document.hasFocus()) window.location.replace("feed.html");
           }, 800);
         } catch (err) {
-          console.error("[SIGNIN] Redirect threw error:", err);
           alert("Redirect failed: " + err.message + "\n\nCheck if feed.html exists in same folder");
         }
       }, 2800);
@@ -480,7 +474,6 @@
   });
 
   if (localStorage.getItem("currentUser")) {
-    console.log("[SIGNIN] Already logged in – auto-redirect");
     window.location.href = "feed.html";
   }
 
