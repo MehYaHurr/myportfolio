@@ -23,18 +23,18 @@
 
     * { margin:0; padding:0; box-sizing:border-box; }
 
+    html, body { min-height: 100%; }
+
     body {
       font-family: 'Cinzel', serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: block;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
       padding: 2rem 1.5rem;
       background-attachment: fixed;
-      overflow-y: auto; /* ← FIXED: was overflow:hidden which blocked the button */
-      -webkit-overflow-scrolling: touch;
       position: relative;
       animation: hollow-drain 60s infinite alternate ease-in-out;
     }
@@ -46,7 +46,7 @@
 
     body::after {
       content: "";
-      position: absolute;
+      position: fixed;
       inset: 0;
       background: radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.75) 100%);
       pointer-events: none;
@@ -88,7 +88,8 @@
       max-width: 480px;
       z-index: 2;
       position: relative;
-      margin: 2rem 0;
+      margin: 0 auto;
+      padding: 1rem 0 2rem;
     }
 
     .card {
@@ -238,7 +239,6 @@
       color: #ef5350;
     }
 
-    /* ── Home Button ── */
     .home-btn {
       display: inline-block;
       margin-top: 1.4rem;
@@ -467,7 +467,7 @@
             if (document.hasFocus()) window.location.replace("feed.html");
           }, 800);
         } catch (err) {
-          alert("Redirect failed: " + err.message + "\n\nCheck if feed.html exists in same folder");
+          alert("Redirect failed: " + err.message);
         }
       }, 2800);
     }, 1600);
